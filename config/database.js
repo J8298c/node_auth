@@ -1,3 +1,6 @@
+// config/database.js
 module.exports = {
-    url: 'mongodb://root:root@ds131511.mlab.com:31511/node_auth'
-}
+
+    'url' : 'mongodb://localhost/passport' // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
+
+};

@@ -1,30 +1,32 @@
 {
-  "name": "node_auth",
-  "version": "1.0.0",
-  "description": "node authentication with passport js",
-  "main": "index.js",
-  "author": "Julio Mojica",
-  "license": "MIT",
+  "name": "node-authentication",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
   "dependencies": {
-    "bcrypt-nodejs": "^0.0.3",
-    "body-parser": "^1.17.1",
-    "connect-flash": "0.1.1",
-    "cookie-parser": "^1.4.3",
-    "ejs": "^2.5.6",
-    "express": "^4.15.2",
-    "express-session": "^1.15.2",
-    "flash": "^1.1.0",
-    "method-override": "^2.3.8",
-    "mongoose": "^4.9.7",
-    "morgan": "^1.8.1",
-    "nodemon": "^1.11.0",
-    "passport": "0.1.17",
-    "passport-facebook": "1.0.2",
-    "passport-google-oauth": "0.1.5",
-    "passport-local": "0.1.6",
-    "passport-twitter": "1.0.2"
+    "bcrypt-nodejs": "latest",
+    "body-parser": "~1.15.2",
+    "connect-flash": "~0.1.1",
+    "cookie-parser": "~1.4.3",
+    "dotenv": "^4.0.0",
+    "ejs": "~2.5.2",
+    "express": "~4.14.0",
+    "express-session": "~1.14.1",
+    "method-override": "~2.3.6",
+    "mongoose": "~4.6.1",
+    "morgan": "~1.7.0",
+    "passport": "~0.3.2",
+    "passport-facebook": "~2.1.1",
+    "passport-google-oauth": "~1.0.0",
+    "passport-local": "~1.0.0",
+    "passport-twitter": "~1.0.4"
+  },
+  "version": "1.0.0",
+  "repository": "https://github.com/J8298c/node_auth.git",
+  "author": "j8298c <juliocmojica@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

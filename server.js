@@ -1,37 +1,47 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 8080;
+// server.js
+
+// set up ======================================================================
+// get all the tools we need
+const express  = require('express');
+const app      = express();
+const port     = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 const passport = require('passport');
-const flash = require('flash');
-const morgan = require('morgan');
+const flash    = require('connect-flash');
+require('dotenv').config()
+const morgan       = require('morgan');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const configDB = require('./config/database');
+const bodyParser   = require('body-parser');
+const session      = require('express-session');
 
-require('./config/passport')(passport);
-mongoose.connect(configDB.url);
+// const configDB = require('./config/database.js');
 
-app.use(morgan('dev'));
-app.use(cookieParser());
-app.use(bodyParser.json());
+// configuration ===============================================================
+mongoose.connect(process.env.DB_URL); // connect to our database
 
-app.set('view engine', 'ejs');
+require('./config/passport')(passport); // pass passport for configuration
 
-app.use(session({secret: 'littledebbiesareyummy',
-                 resave: false,
-                 saveUninitialized: true,
-                 cookie: { secure: true }
-                }));
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.set('view engine', 'ejs'); // set up ejs for templating
 
+// required for passport
+app.use(session({
+    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
- require('./app/routes.js')(app, passport);
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-app.listen(port, ()=>{
-    console.log(`app is now listening on port ${port}`);
-});
+// launch ======================================================================
+app.listen(port);
+console.log('The magic happens on port ' + port);
