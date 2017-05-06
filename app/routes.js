@@ -9,8 +9,12 @@ module.exports = function(app, passport) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
+        const {email} = req.user;
+        console.log('email', email)
         res.render('profile.ejs', {
-            user : req.user
+            userId : req.user.id,
+            userEmail: req.user.email,
+            userName: 'julio'
         });
     });
 
@@ -151,6 +155,7 @@ module.exports = function(app, passport) {
         var user            = req.user;
         user.local.email    = undefined;
         user.local.password = undefined;
+        console.log(req.user, 'user in is loggedIn');
         user.save(function(err) {
             res.redirect('/profile');
         });
